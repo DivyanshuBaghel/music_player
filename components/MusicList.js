@@ -1,7 +1,7 @@
 import { Text, View , ScrollView ,StyleSheet,Button} from 'react-native'
 import React, { Component } from 'react'
 import * as MediaLibrary from 'expo-media-library';
-import { Audio } from 'expo-av';
+import MusicPlayer from './MusicPlayer';
 
 
 
@@ -9,6 +9,7 @@ export default class MusicList extends Component {
     state = {
         files: [],
       };
+      
     
     async componentDidMount() {
         const { status } = await MediaLibrary.requestPermissionsAsync();
@@ -28,15 +29,7 @@ export default class MusicList extends Component {
         {this.state.files.map((file) => (
           <React.Fragment key={file.id}>
             <Text>{file.filename}</Text>
-            <Button
-              title="Play"
-              onPress={async () => {
-                const { sound } = await Audio.Sound.createAsync(
-                  { uri: file.uri },
-                  { shouldPlay: true }
-                );
-              }}
-            />
+            <MusicPlayer uri = {file.uri} />
           </React.Fragment>
         ))}
       </ScrollView>
