@@ -2,6 +2,8 @@ import { Text, View , ScrollView ,StyleSheet,Button} from 'react-native'
 import React, { Component } from 'react'
 import * as MediaLibrary from 'expo-media-library';
 import MusicPlayer from './MusicPlayer';
+import MusicPlayerV2 from './MusicPlayerV2';
+
 
 
 
@@ -15,30 +17,42 @@ export default class MusicList extends Component {
         const { status } = await MediaLibrary.requestPermissionsAsync();
         if (status === 'granted') {
           const assets = await MediaLibrary.getAssetsAsync({
-            first: 100,
+            first: 1000,
             mediaType:"audio",
             mimeTypes: ['audio/mpeg'],
           });
-          alert(JSON.stringify(assets))
+          // alert(JSON.stringify(assets))
           this.setState({ files: assets.assets });
         }
     }
+
   render() {
     return (
+      <View style={styles.container}>
       <ScrollView style={styles.list}>
         {this.state.files.map((file) => (
           <React.Fragment key={file.id}>
-            <Text>{file.filename}</Text>
-            <MusicPlayer uri = {file.uri} />
+            <MusicPlayer uri={file.uri} name={file.filename}/>
           </React.Fragment>
         ))}
       </ScrollView>
+      <View style={styles.footer}>
+          <MusicPlayerV2/>
+      </View>
+      </View>
     )
   }
 }
 
 const styles = StyleSheet.create({
+    container:{
+      flex:1,
+    },
     list:{
-
+      
+    },
+    footer:{
+      justifyContent: "flex-end",
+      marginBottom:30,
     }
 })

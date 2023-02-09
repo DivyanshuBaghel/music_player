@@ -13,7 +13,6 @@ export default function MusicPlayer(props) {
       console.log(props.uri)
       const { sound } = await Audio.Sound.createAsync( { uri : props.uri},{shouldPlay:true});
       setSound(sound);
-
       console.log('Playing Sound');
       await sound.playAsync();
       setIsPlaying(true);
@@ -43,6 +42,7 @@ export default function MusicPlayer(props) {
 
   return (
     <View style={styles.container}>
+      <Text>{props.name}</Text>
       {isPlaying ? (
         <Button title="Stop" onPress={stopSound} />
       ) : (
@@ -58,6 +58,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: '#ecf0f1',
     padding: 10,
+    marginBottom:10,
+    borderRadius:10,
   },
 });
 
