@@ -1,27 +1,37 @@
-import { Text, View , StyleSheet } from 'react-native'
-import React, { Component } from 'react'
+import { StatusBar } from 'expo-status-bar';
+import { StyleSheet, Text, View } from 'react-native';
+import MusicListAndPlayer from './components/MusicListAndPlayer';
 import Constants from 'expo-constants';
-// import MusicList from './components/MusicList'
-// import MusicPlayerV2 from './components/MusicPlayerV2'
-import MusicListAndPlayer from './components/MusicListAndPlayer'
 
-export default class App extends Component {
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.label}>Music</Text>
-        <MusicListAndPlayer/>
+
+export default function App() {
+  return (
+    <View style={styles.container}>
+      <View style={styles.textContainer}>
+        <Text style={styles.lebel}>Music</Text>
       </View>
-    )
-  }
+      <MusicListAndPlayer/>
+      <StatusBar style="light" />
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
-  container:{
-    flex:1,
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
     paddingTop:Constants.statusBarHeight,
+    alignItems: 'flex-start',
+    justifyContent: 'center',
+    backgroundColor:'black'
+    
   },
-  label:{
-    fontSize:50,
+  textContainer:{
+    
   },
-})
+  lebel:{
+    fontSize:54,
+    marginLeft:8,
+    color:"lightblue",
+  }
+});

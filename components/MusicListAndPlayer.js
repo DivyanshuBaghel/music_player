@@ -9,6 +9,7 @@ import {
 import React, { Component } from "react";
 import * as MediaLibrary from "expo-media-library";
 import { Audio } from "expo-av";
+import { MaterialIcons } from '@expo/vector-icons'; 
 
 export default class MusicListAndPlayer extends Component {
   state = {
@@ -31,7 +32,7 @@ export default class MusicListAndPlayer extends Component {
         return { ...item, ids: index };
       });
 
-      alert(JSON.stringify(updatedArray));
+      //alert(JSON.stringify(updatedArray));
       this.setState({ soundFiles: updatedArray });
     }
     Audio.setAudioModeAsync({
@@ -132,7 +133,7 @@ export default class MusicListAndPlayer extends Component {
                 title="Play"
                 onPress={() => this.playSelectedSound(file.ids)}
               >
-                <Text style={styles.btnText}>{file.filename}</Text>
+                <Text style={[styles.btnText,{color:( file.ids - this.state.currentSound ? "white":"lightblue")}]}>{file.filename}</Text>
               </TouchableOpacity>
             </React.Fragment>
           ))}
@@ -142,26 +143,30 @@ export default class MusicListAndPlayer extends Component {
             <Text style={styles.text}>{this.state.song}</Text>
           </View>
           <View style={styles.btns}>
-            <Button
-              style={styles.btnP}
-              title="Previous"
-              onPress={this.playPreviousSound}
-            />
+              <MaterialIcons color="white"
+                name="skip-previous"
+                size={32}
+                title="Previous"
+                onPress={this.playPreviousSound}
+              />
             {this.state.isPlaying ? (
-              <Button
-                style={styles.btnP}
+              <MaterialIcons color="white"
+                name="stop"
+                size={32}
                 title="Stop"
                 onPress={this.stopSound}
               />
             ) : (
-              <Button
-                style={styles.btnP}
+              <MaterialIcons color="white"
+                name="play-arrow"
+                size={32}
                 title="Play"
                 onPress={this.playSound}
               />
             )}
-            <Button
-              style={styles.btnP}
+            <MaterialIcons color="white"
+              name="skip-next"
+              size={32}
               title="Next"
               onPress={this.playNextSound}
             />
@@ -177,13 +182,13 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   list: {
-    backgroundColor: "white",
-    marginBottom: 10,
-    borderRadius: 10,
+    backgroundColor:'black'
   },
   footer: {
     justifyContent: "flex-end",
-    marginBottom: 30,
+    paddingBottom:12,
+    backgroundColor:'#41444B',
+    borderRadius:20,
   },
   btns: {
     flexDirection: "row",
@@ -194,23 +199,19 @@ const styles = StyleSheet.create({
     fontSize:16,
   },
   btn: {
-    fontSize: 60,
-    padding: 10,
-    backgroundColor: "#ecf0f1",
-    borderRadius: 5,
+    padding: 8,
+    height:64,
     justifyContent: "space-evenly",
     alignItems: "flex-start",
-  },
-  btnP: {
-    fontSize: 30,
-    margin: 10,
   },
   textContainer:{
     justifyContent: "center",
     alignItems: "center",
-    marginBottom:10,
+    marginBottom:8,
+    height:54,
   },
   text: {
-    fontSize:20,
+    fontSize:18,
+    color:'lightblue',
   },
 });
