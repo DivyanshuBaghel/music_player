@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import * as MediaLibrary from 'expo-media-library';
 import MusicPlayer from './MusicPlayer';
 import MusicPlayerV2 from './MusicPlayerV2';
+// import MusicPlayerV3 from './MusicPlayerV3';
 
 
 
@@ -21,7 +22,7 @@ export default class MusicList extends Component {
             mediaType:"audio",
             mimeTypes: ['audio/mpeg'],
           });
-          // alert(JSON.stringify(assets))
+          alert(JSON.stringify(assets))
           this.setState({ files: assets.assets });
         }
     }
@@ -39,6 +40,7 @@ export default class MusicList extends Component {
       <View style={styles.footer}>
           <MusicPlayerV2/>
       </View>
+      {/* <MusicPlayerV3 files={this.state.files.toString()}/> */}
       </View>
     )
   }

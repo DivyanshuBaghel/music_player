@@ -33,7 +33,7 @@ export default class MusicPlayerV2 extends Component {
   }
   
 
-  playSound = async () => {
+   playSound = async () => {
     try {
       const soundObject = new Audio.Sound();
       await soundObject.loadAsync(this.state.soundFiles[this.state.currentSound]);
